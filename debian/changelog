@@ -1,0 +1,5 @@
+postgresql-vihash (1.0.0-1) UNRELEASED; urgency=low
+
+  * Initial release
+
+ -- Peter Eisentraut <petere@postgresql.org>  Wed, 16 Jun 2010 11:44:32 -0400
