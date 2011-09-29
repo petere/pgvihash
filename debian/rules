@@ -1,37 +1,21 @@
 #!/usr/bin/make -f
 
-define symlink-farm
-for x in $$(find -name debian -prune -o -name $(1) -prune -o -type f -print); do mkdir -p $$(dirname $(1)/$$x); ln -s $(CURDIR)/$$x $(CURDIR)/$(1)/$$x; done
-endef
-
-define do-build
-$(MAKE) -C build-$(1) all PG_CONFIG=/usr/lib/postgresql/$(1)/bin/pg_config
-endef
-
-define do-install
-$(MAKE) -C build-$(1) install PG_CONFIG=/usr/lib/postgresql/$(1)/bin/pg_config DESTDIR=$(CURDIR)/debian/postgresql-$(1)-vihash
-endef
+include /usr/share/postgresql-common/pgxs_debian_control.mk
 
 %:
 	dh $@
 
-override_dh_auto_configure:
-	$(call symlink-farm,build-8.3)
-	$(call symlink-farm,build-8.4)
-	$(call symlink-farm,build-9.0)
+clean: debian/control
 
 override_dh_auto_build:
-	$(call do-build,8.3)
-	$(call do-build,8.4)
-	$(call do-build,9.0)
+	+pg_buildext build $(CURDIR) build-%v
+	for v in `pg_buildext supported-versions $(CURDIR)`; do ln -s $(CURDIR)/uninstall_vihash.sql build-$$v; done
 
 # do not run:
 override_dh_auto_test:
 
 override_dh_auto_install:
-	$(call do-install,8.3)
-	$(call do-install,8.4)
-	$(call do-install,9.0)
+	+pg_buildext install $(CURDIR) build-%v postgresql-%v-vihash
 
 override_dh_auto_clean:
-	rm -rf build-*
+	+pg_buildext clean $(CURDIR) build-%v

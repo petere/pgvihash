@@ -1,3 +1,9 @@
+postgresql-vihash (1.0.0-2) UNRELEASED; urgency=low
+
+  * Change packaging to use pg_buildext
+
+ -- Peter Eisentraut <petere@postgresql.org>  Thu, 29 Sep 2011 22:04:47 +0300
+
 postgresql-vihash (1.0.0-1) UNRELEASED; urgency=low
 
   * Initial release

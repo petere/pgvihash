@@ -1,0 +1,20 @@
+Source: postgresql-vihash
+Section: database
+Priority: extra
+Maintainer: Peter Eisentraut <petere@postgresql.org>
+Build-Depends: debhelper (>= 7.0.50~), postgresql-server-dev-all (>= 119~)
+Standards-Version: 3.8.4
+Homepage: http://github.com/petere/pgvihash
+
+Package: postgresql-PGVERSION-vihash
+Architecture: any
+Depends: postgresql-PGVERSION, ${misc:Depends}, ${shlibs:Depends}
+Enhances: postgresql-PGVERSION-plproxy
+Description: version-independent hash functions for PostgreSQL PGVERSION
+ This package contains a PostgreSQL extension function vihashtext()
+ that is similar to the built-in hashtext() but is guaranteed not to
+ change over major releases, so that it can be used safely for
+ partitioning or sharding, for example with PL/Proxy, in installations
+ involving multiple PostgreSQL major versions.
+ .
+ PostgreSQL is an object-relational SQL database management system.
