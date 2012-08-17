@@ -43,3 +43,12 @@ and replace
 by
 
     RUN ON vihashtext(arg);
+
+Note: This module is primarily intended as a migration aid.  New users
+of PL/Proxy might want to look into pghashlib
+(https://github.com/markokr/pghashlib) instead, which offers a wider
+selection of stable hashing algorithms.  You can convert your vihash
+usage like this:
+
+PG <=8.3 hashtext = vihashtext = pghashlib "lookup3" algorithm
+PG >=8.4 hashtext =              pghashlib "pgsql84" algorithm
