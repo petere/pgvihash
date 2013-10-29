@@ -1,0 +1,3 @@
+comment = 'version-independent hash functions'
+default_version = 1
+relocatable = true

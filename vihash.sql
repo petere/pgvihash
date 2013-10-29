@@ -1,6 +1,4 @@
-SET search_path = public;
-
 CREATE OR REPLACE FUNCTION vihashtext(text) RETURNS int
-AS 'MODULE_PATHNAME'
+AS '$libdir/vihash'
 STRICT IMMUTABLE
 LANGUAGE C;

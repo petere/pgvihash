@@ -34,7 +34,11 @@ cannot change to use this package without redistributing your data.
 
 To use it, install it into the database by running
 
-\i vihash.sql
+    CREATE EXTENSION vihash;
+
+or, in versions before PostgreSQL 9.1,
+
+    \i vihash.sql
 
 and replace
 
